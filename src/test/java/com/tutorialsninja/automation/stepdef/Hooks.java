@@ -23,7 +23,7 @@ public class Hooks {
 	Base.reader=new PropertyFileReader();
 	Browser.startBrowser();
 	Browser.maximize();
-	Thread.sleep(5000);
+	Thread.sleep(3000);
 	}
 	@After
 	public void closeBrowser(Scenario scenario){
