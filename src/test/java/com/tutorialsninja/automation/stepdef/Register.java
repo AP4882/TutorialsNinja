@@ -41,15 +41,9 @@ public class Register {
 	}
 
 	@When("^I provide all the below details$")
-	public void i_provide_all_the_below_details(DataTable datatable)  {
+	public void i_provide_all_the_below_details(DataTable dataTable)  {
 	 
-		Map<String, String> map = datatable.asMap(String.class, String.class);
-		Elements.TypeText(RegistrationPage.FirstName, map.get("FirstName"));
-		Elements.TypeText(RegistrationPage.LastName, map.get("LastName"));
-		Elements.TypeText(RegistrationPage.Email, map.get("Email"));
-		Elements.TypeText(RegistrationPage.Telephone, map.get("Telephone"));
-		Elements.TypeText(RegistrationPage.Password, map.get("Password"));
-		Elements.TypeText(RegistrationPage.ConfirmPassword, map.get("Password"));
+     RegistrationPage.enterAllDetails(dataTable, "unique");
 	}
 
 	@And("^I select the privacy policy$")
@@ -70,6 +64,43 @@ public class Register {
 		Assert.assertTrue(Elements.isDisplayed(AccountSuccessPage.Successbreadcrumb));
 	}
 
+	@Then("^I should see that user account is not created$")
+	public void i_should_see_that_user_account_is_not_created() {
+	  
+		Assert.assertTrue(Elements.isDisplayed(RegistrationPage.RegisterBreadcrumb));
+	}
 
+	@And("^I should see Error messages informing the user to fill the mandatory fields$")
+	public void i_should_see_Error_messages_informing_the_user_to_fill_the_mandatory_fields() throws Throwable {
+	   
+		Assert.assertTrue(Elements.isDisplayed(RegistrationPage.FirstnameWarning));
+		
+		Assert.assertTrue(Elements.isDisplayed(RegistrationPage.LastnameWarning));
+		
+		Assert.assertTrue(Elements.isDisplayed(RegistrationPage.EmailWarning));
+		
+		Assert.assertTrue(Elements.isDisplayed(RegistrationPage.TelephoneWarning));
+		
+		Assert.assertTrue(Elements.isDisplayed(RegistrationPage.MainWarning));
+	}
+
+	@And("^I subscribe to News letter$")
+	public void i_subscribe_to_News_letter()  {
+	    
+		Elements.click(RegistrationPage.SubscribeNewsLetter);
+	}
+
+	@When("^I provide below duplicate details$")
+	public void i_provide_below_duplicate_details(DataTable dataTable)  {
+		
+		RegistrationPage.enterAllDetails(dataTable,"duplicate");
+		
+	}
+
+	@Then("^I should see that user is restricted to create a duplicate account$")
+	public void i_should_see_that_user_is_restricted_to_create_a_duplicate_account() {
+	      Assert.assertTrue(Elements.VerifyTextEquals(RegistrationPage.MainWarning, "Warning: E-Mail Address is already registered!"));
+
+	}
 	
 }
