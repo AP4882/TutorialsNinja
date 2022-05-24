@@ -7,12 +7,10 @@ import cucumber.api.junit.Cucumber;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-features= {"classpath:FeatureFiles/Search.feature",
-		"classpath:FeatureFiles/Login.feature",
-		"classpath:FeatureFiles/Register.feature"},
+features= {"classpath:FeatureFiles/orders.feature"},
 glue= {"classpath:com.tutorialsninja.automation.stepdef"},
-plugin= {"html:target/cucumber_html_report"}
-//tags= {"@SearchTest1,@SearchTest2"}
+plugin= {"html:target/cucumber_html_report"},
+tags= {"@OrdersTest1"}
 )
 public class Runner {
 
