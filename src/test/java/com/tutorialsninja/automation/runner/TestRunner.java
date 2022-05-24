@@ -12,6 +12,6 @@ glue= {"classpath:com.tutorialsninja.automation.stepdef"},
 plugin= {"html:target/cucumber_html_report"},
 tags= {"@OrdersTest1"}
 )
-public class Runner {
+public class TestRunner {
 
 }
